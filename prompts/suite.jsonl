@@ -1,0 +1,30 @@
+{"id": "ex-01", "kind": "extract", "text": "can you move my 3pm with Sara to thursday", "prompt": "Classify the intent and list the entities in this message:\n\ncan you move my 3pm with Sara to thursday"}
+{"id": "ex-02", "kind": "extract", "text": "what's the refund window for annual plans", "prompt": "Classify the intent and list the entities in this message:\n\nwhat's the refund window for annual plans"}
+{"id": "ex-03", "kind": "extract", "text": "lol ok thanks, have a good one", "prompt": "Classify the intent and list the entities in this message:\n\nlol ok thanks, have a good one"}
+{"id": "ex-04", "kind": "extract", "text": "Cancel order #48213 and email the customer at j.ruiz@example.com", "prompt": "Classify the intent and list the entities in this message:\n\nCancel order #48213 and email the customer at j.ruiz@example.com"}
+{"id": "ex-05", "kind": "extract", "text": "does the Helsinki office have parking or should I take the tram", "prompt": "Classify the intent and list the entities in this message:\n\ndoes the Helsinki office have parking or should I take the tram"}
+{"id": "ex-06", "kind": "extract", "text": "set a reminder: renew the SSL cert for api.example.org on March 2", "prompt": "Classify the intent and list the entities in this message:\n\nset a reminder: renew the SSL cert for api.example.org on March 2"}
+{"id": "ex-07", "kind": "extract", "text": "how do I reset 2FA if I lost my phone", "prompt": "Classify the intent and list the entities in this message:\n\nhow do I reset 2FA if I lost my phone"}
+{"id": "ex-08", "kind": "extract", "text": "good morning!! coffee machine on floor 4 is broken again", "prompt": "Classify the intent and list the entities in this message:\n\ngood morning!! coffee machine on floor 4 is broken again"}
+{"id": "ex-09", "kind": "extract", "text": "export last month's invoices for Acme Oy as CSV", "prompt": "Classify the intent and list the entities in this message:\n\nexport last month's invoices for Acme Oy as CSV"}
+{"id": "ex-10", "kind": "extract", "text": "is the Postgres 16 upgrade still planned for the weekend", "prompt": "Classify the intent and list the entities in this message:\n\nis the Postgres 16 upgrade still planned for the weekend"}
+{"id": "ex-11", "kind": "extract", "text": "Add Maria Lindqvist and Tomás Ortega to the #release channel", "prompt": "Classify the intent and list the entities in this message:\n\nAdd Maria Lindqvist and Tomás Ortega to the #release channel"}
+{"id": "ex-12", "kind": "extract", "text": "why is the staging deploy stuck on step 4", "prompt": "Classify the intent and list the entities in this message:\n\nwhy is the staging deploy stuck on step 4"}
+{"id": "ex-13", "kind": "extract", "text": "thanks, that fixed it 🙏", "prompt": "Classify the intent and list the entities in this message:\n\nthanks, that fixed it 🙏"}
+{"id": "ex-14", "kind": "extract", "text": "book a meeting room for 6 people tomorrow 10-11, needs a screen", "prompt": "Classify the intent and list the entities in this message:\n\nbook a meeting room for 6 people tomorrow 10-11, needs a screen"}
+{"id": "ex-15", "kind": "extract", "text": "what's the difference between the Pro and Team tiers", "prompt": "Classify the intent and list the entities in this message:\n\nwhat's the difference between the Pro and Team tiers"}
+{"id": "ex-16", "kind": "extract", "text": "restart the worker on queue-2 and tell me when it's back", "prompt": "Classify the intent and list the entities in this message:\n\nrestart the worker on queue-2 and tell me when it's back"}
+{"id": "ex-17", "kind": "extract", "text": "hmm not sure, maybe? let me think about it", "prompt": "Classify the intent and list the entities in this message:\n\nhmm not sure, maybe? let me think about it"}
+{"id": "ex-18", "kind": "extract", "text": "Translate the onboarding email into Finnish and Swedish", "prompt": "Classify the intent and list the entities in this message:\n\nTranslate the onboarding email into Finnish and Swedish"}
+{"id": "ex-19", "kind": "extract", "text": "who approved PR 1182 in the billing repo", "prompt": "Classify the intent and list the entities in this message:\n\nwho approved PR 1182 in the billing repo"}
+{"id": "ex-20", "kind": "extract", "text": "pause all marketing emails to users in Germany until Monday", "prompt": "Classify the intent and list the entities in this message:\n\npause all marketing emails to users in Germany until Monday"}
+{"id": "ex-21", "kind": "extract", "text": "the dashboard says 0 active users which can't be right", "prompt": "Classify the intent and list the entities in this message:\n\nthe dashboard says 0 active users which can't be right"}
+{"id": "ex-22", "kind": "extract", "text": "order 2 more RTX 3060 laptops for the new interns", "prompt": "Classify the intent and list the entities in this message:\n\norder 2 more RTX 3060 laptops for the new interns"}
+{"id": "ex-23", "kind": "extract", "text": "haha yes Friday works", "prompt": "Classify the intent and list the entities in this message:\n\nhaha yes Friday works"}
+{"id": "ex-24", "kind": "extract", "text": "what time zone are the nightly backups scheduled in", "prompt": "Classify the intent and list the entities in this message:\n\nwhat time zone are the nightly backups scheduled in"}
+{"id": "oe-01", "kind": "open", "prompt": "Explain in two short paragraphs why retrieval-augmented generation reduces hallucination, and where it does not."}
+{"id": "oe-02", "kind": "open", "prompt": "Summarise the trade-offs between running a 4B language model locally and calling a hosted API, for a small team."}
+{"id": "oe-03", "kind": "open", "prompt": "Write a short, friendly reply to a customer whose order arrived damaged, offering a replacement."}
+{"id": "oe-04", "kind": "open", "prompt": "List five things to check when a background job queue silently stops processing."}
+{"id": "oe-05", "kind": "open", "prompt": "Describe what time-to-first-token measures and why it matters for voice assistants."}
+{"id": "oe-06", "kind": "open", "prompt": "Give a one-paragraph explanation of reciprocal rank fusion for a junior developer."}
