@@ -10,6 +10,8 @@ from pathlib import Path
 
 from slm.client import Ollama
 
+from .rss import RSSWatcher, loaded_model
+
 
 @dataclass
 class Sample:
@@ -20,9 +22,13 @@ class Sample:
     tokens_per_sec: float
     total_ms: float
     output_tokens: int
+    peak_rss_mb: float
+    vram_mb: int
+    fully_in_vram: bool
 
 
 def measure(client: Ollama, model: str, prompt_id: str, prompt: str, run: int) -> Sample:
+    watcher = RSSWatcher().start()
     t0 = time.perf_counter()
     first = None
     tokens = 0
@@ -33,12 +39,17 @@ def measure(client: Ollama, model: str, prompt_id: str, prompt: str, run: int) -
             first = time.perf_counter()
         tokens += 1
     end = time.perf_counter()
+    peak = watcher.stop()
+    mem = loaded_model(model)
     return Sample(
         model=model, prompt_id=prompt_id, run=run,
         ttft_ms=round((first - t0) * 1000, 1),
         tokens_per_sec=round(tokens / (end - t0), 2),
         total_ms=round((end - t0) * 1000, 1),
         output_tokens=tokens,
+        peak_rss_mb=peak,
+        vram_mb=mem["vram_mb"],
+        fully_in_vram=mem["fully_in_vram"],
     )
 
 
