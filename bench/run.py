@@ -10,6 +10,7 @@ from pathlib import Path
 
 from slm.client import Ollama
 
+from .common import cold_load_ms, load_models, load_suite, machine, out_path, unload
 from .rss import RSSWatcher, loaded_model
 
 
@@ -66,23 +67,32 @@ def measure(client: Ollama, model: str, prompt_id: str, prompt: str, run: int) -
 
 def main() -> None:
     ap = argparse.ArgumentParser()
-    ap.add_argument("--models", nargs="+", default=["qwen3:4b"])
-    ap.add_argument("--suite", default="prompts/suite.jsonl")
-    ap.add_argument("--runs", type=int, default=3)
-    ap.add_argument("--out", default="results/bench.csv")
+    ap.add_argument("--models", nargs="*", help="subset of tags from models.yaml")
+    ap.add_argument("--runs", type=int, default=5)
+    ap.add_argument("--out")
     args = ap.parse_args()
 
-    prompts = [json.loads(l) for l in Path(args.suite).read_text().splitlines() if l.strip()]
+    prompts = load_suite()
     client = Ollama()
-    with open(args.out, "w", newline="") as f:
-        w = csv.DictWriter(f, fieldnames=list(Sample.__dataclass_fields__))
+    out = Path(args.out) if args.out else out_path("bench")
+    (out.with_suffix(".machine.json")).write_text(json.dumps(machine(), indent=2))
+
+    with open(out, "w", newline="") as f:
+        w = csv.DictWriter(f, fieldnames=["label", "quant", "cold_load_ms", *Sample.__dataclass_fields__])
         w.writeheader()
-        for model in args.models:
+        for m in load_models(only=args.models):
+            load_ms = cold_load_ms(m["tag"])
+            print(f"{m['tag']}: cold load {load_ms:.0f} ms")
+            # one throwaway pass so run 0 isn't measuring a cold KV cache
+            client.generate(m["tag"], prompts[0]["prompt"], num_predict=16)
             for run in range(args.runs):
                 for p in prompts:
-                    s = measure(client, model, p["id"], p["prompt"], run)
-                    w.writerow(asdict(s))
-                    print(f"{model:<16} {p['id']:<8} run {run}  ttft {s.ttft_ms:>7.1f} ms  {s.decode_tps:>6.1f} t/s")
+                    s = measure(client, m["tag"], p["id"], p["prompt"], run)
+                    w.writerow({"label": m["label"], "quant": m["quant"], "cold_load_ms": load_ms, **asdict(s)})
+                    f.flush()
+                    print(f"{m['tag']:<16} {p['id']:<6} run {run}  ttft {s.ttft_ms:>7.1f} ms  {s.decode_tps:>6.1f} t/s")
+            unload(m["tag"])
+    print(f"-> {out}")
 
 
 if __name__ == "__main__":

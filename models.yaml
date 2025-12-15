@@ -1,0 +1,11 @@
+# Models under test. `tag` is what ollama pulls; `label` is what goes in tables.
+models:
+  - tag: qwen3:4b
+    label: Qwen3 4B
+    quant: Q4_K_M
+  - tag: llama3.2:3b
+    label: Llama 3.2 3B
+    quant: Q4_K_M
+  - tag: phi4-mini
+    label: Phi-4-mini 3.8B
+    quant: Q4_K_M
