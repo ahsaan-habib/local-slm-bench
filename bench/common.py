@@ -13,8 +13,9 @@ import yaml
 from slm.client import OLLAMA_URL
 
 
-def load_models(path: str = "models.yaml", only: list[str] | None = None) -> list[dict]:
-    models = yaml.safe_load(Path(path).read_text())["models"]
+def load_models(path: str = "models.yaml", only: list[str] | None = None,
+                set_name: str = "compare") -> list[dict]:
+    models = yaml.safe_load(Path(path).read_text())["sets"][set_name]
     return [m for m in models if not only or m["tag"] in only]
 
 

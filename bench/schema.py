@@ -17,6 +17,7 @@ from .common import load_models, load_suite, out_path
 
 def main() -> None:
     ap = argparse.ArgumentParser()
+    ap.add_argument("--set", default="compare", help="model set from models.yaml")
     ap.add_argument("--models", nargs="*")
     ap.add_argument("--runs", type=int, default=5)
     ap.add_argument("--constrained", action="store_true",
@@ -30,7 +31,7 @@ def main() -> None:
         w = csv.DictWriter(f, fieldnames=["model", "prompt_id", "run", "valid_first",
                                           "valid_after_retry", "attempts", "latency_ms"])
         w.writeheader()
-        for m in load_models(only=args.models):
+        for m in load_models(only=args.models, set_name=args.set):
             first_ok = final_ok = n = 0
             for run in range(args.runs):
                 for p in suite:

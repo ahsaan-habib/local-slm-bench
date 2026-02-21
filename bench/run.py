@@ -67,6 +67,7 @@ def measure(client: Ollama, model: str, prompt_id: str, prompt: str, run: int) -
 
 def main() -> None:
     ap = argparse.ArgumentParser()
+    ap.add_argument("--set", default="compare", help="model set from models.yaml")
     ap.add_argument("--models", nargs="*", help="subset of tags from models.yaml")
     ap.add_argument("--runs", type=int, default=5)
     ap.add_argument("--out")
@@ -80,7 +81,7 @@ def main() -> None:
     with open(out, "w", newline="") as f:
         w = csv.DictWriter(f, fieldnames=["label", "quant", "cold_load_ms", *Sample.__dataclass_fields__])
         w.writeheader()
-        for m in load_models(only=args.models):
+        for m in load_models(only=args.models, set_name=args.set):
             load_ms = cold_load_ms(m["tag"])
             print(f"{m['tag']}: cold load {load_ms:.0f} ms")
             # one throwaway pass so run 0 isn't measuring a cold KV cache

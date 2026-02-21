@@ -1,11 +1,30 @@
-# Models under test. `tag` is what ollama pulls; `label` is what goes in tables.
-models:
-  - tag: qwen3:4b
-    label: Qwen3 4B
-    quant: Q4_K_M
-  - tag: llama3.2:3b
-    label: Llama 3.2 3B
-    quant: Q4_K_M
-  - tag: phi4-mini
-    label: Phi-4-mini 3.8B
-    quant: Q4_K_M
+# Models under test, grouped into sets. `tag` is what ollama runs; `label` is
+# what goes in tables. Run a set with --set <name> (default: compare).
+sets:
+  compare:
+    - tag: qwen3:4b
+      label: Qwen3 4B
+      quant: Q4_K_M
+    - tag: llama3.2:3b
+      label: Llama 3.2 3B
+      quant: Q4_K_M
+    - tag: phi4-mini
+      label: Phi-4-mini 3.8B
+      quant: Q4_K_M
+
+  # Same weights, different quantisation. The llama tags come from the ollama
+  # library; the qwen Q5 is built locally with scripts/quantize.sh because the
+  # library only ships Q4_K_M / Q8_0 for it.
+  quant:
+    - tag: llama3.2:3b-instruct-q4_K_M
+      label: Llama 3.2 3B
+      quant: Q4_K_M
+    - tag: llama3.2:3b-instruct-q5_K_M
+      label: Llama 3.2 3B
+      quant: Q5_K_M
+    - tag: qwen3:4b-q4_K_M
+      label: Qwen3 4B
+      quant: Q4_K_M
+    - tag: qwen3-4b-local:q5_K_M
+      label: Qwen3 4B
+      quant: Q5_K_M
