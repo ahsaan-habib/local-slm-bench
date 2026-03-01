@@ -71,6 +71,8 @@ def main() -> None:
     ap.add_argument("--models", nargs="*", help="subset of tags from models.yaml")
     ap.add_argument("--runs", type=int, default=5)
     ap.add_argument("--out")
+    ap.add_argument("--cooldown", type=int, default=60,
+                    help="seconds idle between models; a hot laptop loses ~8%% decode on long runs")
     args = ap.parse_args()
 
     prompts = load_suite()
@@ -93,6 +95,7 @@ def main() -> None:
                     f.flush()
                     print(f"{m['tag']:<16} {p['id']:<6} run {run}  ttft {s.ttft_ms:>7.1f} ms  {s.decode_tps:>6.1f} t/s")
             unload(m["tag"])
+            time.sleep(args.cooldown)
     print(f"-> {out}")
 
 
