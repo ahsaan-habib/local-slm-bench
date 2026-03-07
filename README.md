@@ -60,6 +60,19 @@ curl localhost:8100/extract -d '{"text":"move my 3pm with Sara to thursday"}' -H
 `/extract` returns 422 with the raw model outputs when validation fails twice,
 never a 200 with a guess.
 
+## Quantisation: Q4 vs Q5
+
+```bash
+make quant     # builds qwen3 Q5_K_M with llama.cpp, imports it, benches the quant set
+```
+
+The `quant` set in `models.yaml` pairs the same weights at Q4_K_M and Q5_K_M
+(Llama 3.2 from the Ollama library, Qwen3 Q5 built locally by
+`scripts/quantize.sh`, which reuses the library model's Modelfile so only the
+weights differ). The question isn't "is Q5 better" — it is — but whether the
+exchange rate (memory, decode t/s) is worth the schema-compliance gain on
+*your* task and machine. Read it off `make report`, per pair of rows.
+
 ## Caveats
 
 One machine; thermals drift on long runs; 30 prompts separates big gaps, not
