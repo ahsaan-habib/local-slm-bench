@@ -23,7 +23,7 @@ report:
 	python -m bench.report | tee results/REPORT.md
 
 quant:
-	./scripts/quantize.sh Qwen/Qwen3-4B Q5_K_M qwen3-4b-local:q5_K_M
+	./scripts/quantize.sh Qwen/Qwen3-4B-Instruct-2507 Q5_K_M qwen3-4b-instruct-local:q5_K_M
 	$(MAKE) bench schema SET=quant
 
 serve:

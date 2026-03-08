@@ -2,7 +2,7 @@
 produced *any* variation across runs — and, for extraction, whether the JSON
 structure itself changed (keys present/absent), not just the wording.
 
-    python -m bench.temperature --model qwen3:4b --runs 5
+    python -m bench.temperature --model qwen3:4b-instruct --runs 5
 """
 from __future__ import annotations
 
@@ -26,7 +26,7 @@ def _shape(raw: str) -> str:
 
 def main() -> None:
     ap = argparse.ArgumentParser()
-    ap.add_argument("--model", default="qwen3:4b")
+    ap.add_argument("--model", default="qwen3:4b-instruct")
     ap.add_argument("--runs", type=int, default=5)
     ap.add_argument("--temps", nargs="+", type=float, default=[0.0, 0.7])
     args = ap.parse_args()

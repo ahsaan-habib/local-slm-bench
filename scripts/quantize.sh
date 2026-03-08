@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # Build a GGUF at a given quant from a Hugging Face model and import it into ollama.
-#   scripts/quantize.sh Qwen/Qwen3-4B Q5_K_M qwen3-4b-local:q5_K_M
+#   scripts/quantize.sh Qwen/Qwen3-4B-Instruct-2507 Q5_K_M qwen3-4b-instruct-local:q5_K_M
 # Needs: git, python, cmake, a C++ compiler, huggingface-cli. Uses ./models/ as scratch.
 set -euo pipefail
 hf_model="$1"; quant="$2"; tag="$3"
@@ -23,7 +23,7 @@ out="$work/$name-$quant.gguf"
 [ -f "$out" ] || "$work/llama.cpp/build/bin/llama-quantize" "$f16" "$out" "$quant"
 
 # reuse the chat template + params of the library model so only the weights differ
-base="${BASE_TAG:-qwen3:4b}"
+base="${BASE_TAG:-qwen3:4b-instruct}"
 ollama show "$base" --modelfile | sed "s|^FROM .*|FROM $(realpath "$out")|" > "$work/Modelfile.$quant"
 ollama create "$tag" -f "$work/Modelfile.$quant"
 echo "created $tag from $out"

@@ -4,9 +4,11 @@ Can a 3–4B model running on one laptop do the job? This repo measures it
 instead of arguing about it: same machine, same 30 prompts, five runs each,
 everything written to CSV.
 
-Default model is **Qwen3 4B** via [Ollama](https://ollama.com); Llama 3.2 3B
-and Phi-4-mini are in `models.yaml` as the comparison set. Add anything Ollama
-can pull.
+Default model is **Qwen3 4B Instruct** (`qwen3:4b-instruct`) via [Ollama](https://ollama.com);
+Llama 3.2 3B and Phi-4-mini are in `models.yaml` as the comparison set. Add
+anything Ollama can pull. Not plain `qwen3:4b`: that tag is now a thinking-only
+build that ignores `think: false` and writes its reasoning into the output,
+which wrecks both the timings and the JSON.
 
 ## What it measures
 
@@ -33,7 +35,7 @@ make temperature          # -> results/temperature-...csv
 make report               # -> results/REPORT.md
 ```
 
-`MODELS="qwen3:4b phi4-mini" make bench` for a subset, `RUNS=3` for a quick one.
+`MODELS="qwen3:4b-instruct phi4-mini" make bench` for a subset, `RUNS=3` for a quick one.
 
 Close other heavy apps, let the machine cool between runs, and keep it on AC
 power. Every number is only valid for the machine in its `.machine.json`.
@@ -63,7 +65,7 @@ never a 200 with a guess.
 ## Quantisation: Q4 vs Q5
 
 ```bash
-make quant     # builds qwen3 Q5_K_M with llama.cpp, imports it, benches the quant set
+make quant     # builds Qwen3 4B Instruct Q5_K_M with llama.cpp, imports it, benches the quant set
 ```
 
 The `quant` set in `models.yaml` pairs the same weights at Q4_K_M and Q5_K_M

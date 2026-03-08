@@ -13,7 +13,7 @@ from pydantic import BaseModel
 from .client import Ollama
 from .structured import Extraction, extract
 
-MODEL = os.environ.get("SLM_MODEL", "qwen3:4b")
+MODEL = os.environ.get("SLM_MODEL", "qwen3:4b-instruct")
 
 app = FastAPI(title="local-slm")
 client = Ollama()
