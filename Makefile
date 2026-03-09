@@ -2,7 +2,7 @@ MODELS ?=
 RUNS ?= 5
 SET ?= compare
 
-.PHONY: install pull bench schema temperature report serve quant
+.PHONY: install pull bench schema temperature report serve quant test
 
 install:
 	python -m venv .venv && .venv/bin/pip install -e .
@@ -28,3 +28,6 @@ quant:
 
 serve:
 	uvicorn slm.api:app --port 8100
+
+test:
+	pytest -q
