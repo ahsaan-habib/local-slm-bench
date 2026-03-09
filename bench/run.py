@@ -45,6 +45,8 @@ def measure(client: Ollama, model: str, prompt_id: str, prompt: str, run: int) -
             first = time.perf_counter()  # TTFT: the first token, not the first byte
         tokens += 1
     end = time.perf_counter()
+    if first is None:     # empty reply (e.g. an immediate stop token): no first token to time
+        first = end
     peak = watcher.stop()
     mem = loaded_model(model)
     return Sample(

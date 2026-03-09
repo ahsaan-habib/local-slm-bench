@@ -45,7 +45,8 @@ def main() -> None:
                     first_ok += ok_first
                     final_ok += a.result is not None
                     n += 1
-            print(f"{m['tag']:<16} valid first {first_ok / n:6.1%}   after one retry {final_ok / n:6.1%}")
+            if n:
+                print(f"{m['tag']:<16} valid first {first_ok / n:6.1%}   after one retry {final_ok / n:6.1%}")
     print(f"-> {out}")
 
 
